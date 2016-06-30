@@ -1,0 +1,69 @@
+<?php
+
+/**
+* Implements hook_schema().
+*/
+function research_rotations_schema() {
+  $schema = array();
+
+  $schema['research_rotations_signups'] = array(
+
+    'description' => 'The base table for research rotation signups.',
+    'fields' => array(
+      'nid' => array(
+        'description' => 'The primary identifier for research rotation signups.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+      'student_name' => array(
+        'description' => 'The student name.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'first_choice' => array(
+        'description' => 'The first choice.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'second_choice' => array(
+        'description' => 'The second choice.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'third_choice' => array(
+        'description' => 'The third choice.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'comments' => array(
+        'description' => 'Comments.',
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+    ),
+    'indexes' => array(
+      'research_rotations_signups_student_name' => array('student_name'),
+    ),
+
+    'primary key' => array('nid'),
+  );
+  return $schema;
+}
+
+/**
+* Implements hook_update_N().
+*/
+/*function research_rotations_update_7000() {
+  drupal_install_schema('research_rotations_signups');
+}*/

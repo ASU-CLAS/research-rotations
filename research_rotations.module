@@ -1,0 +1,1773 @@
+<?php
+
+/**
+ * @file
+ * A module that manages research rotation signups and submissions.
+ *
+ *
+ */
+
+ /**
+  * Implements hook_strongarm().
+  */
+ function research_rotations_strongarm() {
+   $export = array();
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'field_bundle_settings_node__research_rotation';
+   $strongarm->value = array(
+     'view_modes' => array(),
+     'extra_fields' => array(
+       'form' => array(
+         'title' => array(
+           'weight' => '-5',
+         ),
+         'path' => array(
+           'weight' => '30',
+         ),
+       ),
+       'display' => array(),
+     ),
+   );
+   $export['field_bundle_settings_node__research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'menu_options_research_rotation';
+   $strongarm->value = array(
+     0 => 'main-menu',
+   );
+   $export['menu_options_research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'menu_parent_research_rotation';
+   $strongarm->value = 'main-menu:0';
+   $export['menu_parent_research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'node_options_research_rotation';
+   $strongarm->value = array(
+     0 => 'status',
+     1 => 'promote',
+   );
+   $export['node_options_research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'node_preview_research_rotation';
+   $strongarm->value = '1';
+   $export['node_preview_research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'node_submitted_research_rotation';
+   $strongarm->value = 1;
+   $export['node_submitted_research_rotation'] = $strongarm;
+
+   $strongarm = new stdClass();
+   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+   $strongarm->api_version = 1;
+   $strongarm->name = 'panelizer_defaults_node_research_rotation';
+   $strongarm->value = array(
+     'status' => 1,
+     'view modes' => array(
+       'page_manager' => array(
+         'status' => 0,
+         'default' => 0,
+         'choice' => 0,
+       ),
+       'default' => array(
+         'status' => 1,
+         'default' => 1,
+         'choice' => 0,
+       ),
+       'teaser' => array(
+         'status' => 0,
+         'default' => 0,
+         'choice' => 0,
+       ),
+       'featured' => array(
+         'status' => 0,
+         'default' => 0,
+         'choice' => 0,
+       ),
+     ),
+   );
+   $export['panelizer_defaults_node_research_rotation'] = $strongarm;
+
+   return $export;
+ }
+
+ /**
+  * Implements hook_panelizer_defaults().
+  */
+ function research_rotations_panelizer_defaults() {
+   $export = array();
+
+   $panelizer = new stdClass();
+   $panelizer->disabled = FALSE; /* Edit this to true to make a default panelizer disabled initially */
+   $panelizer->api_version = 1;
+   $panelizer->name = 'node:research_rotation:default:default';
+   $panelizer->title = 'Default';
+   $panelizer->panelizer_type = 'node';
+   $panelizer->panelizer_key = 'research_rotation';
+   $panelizer->no_blocks = FALSE;
+   $panelizer->css_id = '';
+   $panelizer->css = '';
+   $panelizer->pipeline = 'standard';
+   $panelizer->contexts = array();
+   $panelizer->relationships = array();
+   $panelizer->access = array();
+   $panelizer->view_mode = 'default';
+   $panelizer->css_class = '';
+   $panelizer->title_element = 'H2';
+   $panelizer->link_to_entity = TRUE;
+   $panelizer->extra = array();
+   $display = new panels_display();
+   $display->layout = 'radix_moscone';
+   $display->layout_settings = array();
+   $display->panel_settings = array(
+     'style_settings' => array(
+       'default' => NULL,
+       'header' => NULL,
+       'sidebar' => NULL,
+       'contentmain' => NULL,
+       'footer' => NULL,
+     ),
+   );
+   $display->cache = array();
+   $display->title = '%node:title';
+   $display->uuid = 'b2dc679c-ef8b-411d-9ef6-175ef5d3bd4d';
+   $display->content = array();
+   $display->panels = array();
+   $pane = new stdClass();
+   $pane->pid = 'new-7df872b3-2e2d-4f0a-b7ea-6671389226b7';
+   $pane->panel = 'contentmain';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_image';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'file_rendered',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(
+       'file_view_mode' => 'default',
+     ),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 0;
+   $pane->locks = array();
+   $pane->uuid = '7df872b3-2e2d-4f0a-b7ea-6671389226b7';
+   $display->content['new-7df872b3-2e2d-4f0a-b7ea-6671389226b7'] = $pane;
+   $display->panels['contentmain'][0] = 'new-7df872b3-2e2d-4f0a-b7ea-6671389226b7';
+   $pane = new stdClass();
+   $pane->pid = 'new-ba139a7e-fc21-49be-a3ff-76296c33e5dd';
+   $pane->panel = 'contentmain';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:body';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'text_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(),
+     'context' => 'panelizer',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 1;
+   $pane->locks = array();
+   $pane->uuid = 'ba139a7e-fc21-49be-a3ff-76296c33e5dd';
+   $display->content['new-ba139a7e-fc21-49be-a3ff-76296c33e5dd'] = $pane;
+   $display->panels['contentmain'][1] = 'new-ba139a7e-fc21-49be-a3ff-76296c33e5dd';
+   $pane = new stdClass();
+   $pane->pid = 'new-58340bd8-4a07-460b-840b-7811c8dd843f';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_professor';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'text_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(),
+     'context' => 'panelizer',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 0;
+   $pane->locks = array();
+   $pane->uuid = '58340bd8-4a07-460b-840b-7811c8dd843f';
+   $display->content['new-58340bd8-4a07-460b-840b-7811c8dd843f'] = $pane;
+   $display->panels['sidebar'][0] = 'new-58340bd8-4a07-460b-840b-7811c8dd843f';
+   $pane = new stdClass();
+   $pane->pid = 'new-c3a663b7-d52a-4259-a979-248de59a6d69';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_area';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'text_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 1;
+   $pane->locks = array();
+   $pane->uuid = 'c3a663b7-d52a-4259-a979-248de59a6d69';
+   $display->content['new-c3a663b7-d52a-4259-a979-248de59a6d69'] = $pane;
+   $display->panels['sidebar'][1] = 'new-c3a663b7-d52a-4259-a979-248de59a6d69';
+   $pane = new stdClass();
+   $pane->pid = 'new-30db5adf-efb2-4745-b057-964301ebfce5';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_type';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'text_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 2;
+   $pane->locks = array();
+   $pane->uuid = '30db5adf-efb2-4745-b057-964301ebfce5';
+   $display->content['new-30db5adf-efb2-4745-b057-964301ebfce5'] = $pane;
+   $display->panels['sidebar'][2] = 'new-30db5adf-efb2-4745-b057-964301ebfce5';
+   $pane = new stdClass();
+   $pane->pid = 'new-f7e87eff-594c-4ee0-83bc-abd7cf2bf0b0';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_start_end_date';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'date_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(
+       'format_type' => 'panopoly_day',
+       'multiple_number' => '',
+       'multiple_from' => '',
+       'multiple_to' => '',
+       'fromto' => 'both',
+       'show_remaining_days' => 0,
+     ),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 3;
+   $pane->locks = array();
+   $pane->uuid = 'f7e87eff-594c-4ee0-83bc-abd7cf2bf0b0';
+   $display->content['new-f7e87eff-594c-4ee0-83bc-abd7cf2bf0b0'] = $pane;
+   $display->panels['sidebar'][3] = 'new-f7e87eff-594c-4ee0-83bc-abd7cf2bf0b0';
+   $pane = new stdClass();
+   $pane->pid = 'new-463ccaba-0f60-4b60-a8c7-27a3fb825d11';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_paid_not_paid';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'list_default',
+     'delta_limit' => 0,
+     'delta_offset' => '0',
+     'delta_reversed' => FALSE,
+     'formatter_settings' => array(),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 4;
+   $pane->locks = array();
+   $pane->uuid = '463ccaba-0f60-4b60-a8c7-27a3fb825d11';
+   $display->content['new-463ccaba-0f60-4b60-a8c7-27a3fb825d11'] = $pane;
+   $display->panels['sidebar'][4] = 'new-463ccaba-0f60-4b60-a8c7-27a3fb825d11';
+   $pane = new stdClass();
+   $pane->pid = 'new-aab0cde1-5f48-4551-a119-2b208deb4820';
+   $pane->panel = 'sidebar';
+   $pane->type = 'entity_field';
+   $pane->subtype = 'node:field_grad_undergrad';
+   $pane->shown = TRUE;
+   $pane->access = array();
+   $pane->configuration = array(
+     'label' => 'above',
+     'formatter' => 'list_default',
+     'delta_limit' => '0',
+     'delta_offset' => '0',
+     'delta_reversed' => 0,
+     'formatter_settings' => array(),
+     'context' => array(),
+     'override_title' => 0,
+     'override_title_text' => '',
+     'override_title_heading' => 'h2',
+   );
+   $pane->cache = array();
+   $pane->style = array(
+     'settings' => NULL,
+   );
+   $pane->css = array();
+   $pane->extras = array();
+   $pane->position = 5;
+   $pane->locks = array();
+   $pane->uuid = 'aab0cde1-5f48-4551-a119-2b208deb4820';
+   $display->content['new-aab0cde1-5f48-4551-a119-2b208deb4820'] = $pane;
+   $display->panels['sidebar'][5] = 'new-aab0cde1-5f48-4551-a119-2b208deb4820';
+   $display->hide_title = PANELS_TITLE_NONE;
+   $display->title_pane = 'new-ba139a7e-fc21-49be-a3ff-76296c33e5dd';
+   $panelizer->display = $display;
+   $export['node:research_rotation:default:default'] = $panelizer;
+
+   return $export;
+ }
+
+ /**
+  * Implements hook_field_default_field_instances().
+  */
+ function research_rotations_field_default_field_instances() {
+   $field_instances = array();
+
+   // Exported field_instance: 'node-research_rotation-body'
+   $field_instances['node-research_rotation-body'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'hidden',
+         'module' => 'text',
+         'settings' => array(),
+         'type' => 'text_default',
+         'weight' => 0,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'hidden',
+         'module' => 'text',
+         'settings' => array(
+           'trim_length' => 600,
+         ),
+         'type' => 'text_summary_or_trimmed',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'body',
+     'label' => 'Project Description',
+     'required' => 0,
+     'settings' => array(
+       'display_summary' => 1,
+       'linkit' => array(
+         'button_text' => 'Search',
+         'enable' => 0,
+         'profile' => '',
+       ),
+       'text_processing' => 1,
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'text',
+       'settings' => array(
+         'maxlength_js' => '',
+         'maxlength_js_enforce' => 0,
+         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+         'maxlength_js_label_summary' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+         'maxlength_js_summary' => '',
+         'maxlength_js_truncate_html' => 0,
+         'rows' => 20,
+         'summary_rows' => 5,
+       ),
+       'type' => 'text_textarea_with_summary',
+       'weight' => 31,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_area'
+   $field_instances['node-research_rotation-field_area'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'text',
+         'settings' => array(),
+         'type' => 'text_default',
+         'weight' => 2,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_area',
+     'label' => 'Area',
+     'required' => 0,
+     'settings' => array(
+       'linkit' => array(
+         'button_text' => 'Search',
+         'enable' => 0,
+         'profile' => '',
+       ),
+       'text_processing' => 0,
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'text',
+       'settings' => array(
+         'maxlength_js' => 0,
+         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+         'size' => 60,
+       ),
+       'type' => 'text_textfield',
+       'weight' => 33,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_grad_undergrad'
+   $field_instances['node-research_rotation-field_grad_undergrad'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'list',
+         'settings' => array(),
+         'type' => 'list_default',
+         'weight' => 7,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_grad_undergrad',
+     'label' => 'Grad Undergrad',
+     'required' => 1,
+     'settings' => array(
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'options',
+       'settings' => array(),
+       'type' => 'options_buttons',
+       'weight' => 38,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_image'
+   $field_instances['node-research_rotation-field_image'] = array(
+     'bundle' => 'research_rotation',
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'image',
+         'settings' => array(
+           'image_link' => '',
+           'image_style' => '',
+         ),
+         'type' => 'image',
+         'weight' => 4,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_image',
+     'label' => 'Image',
+     'required' => 0,
+     'settings' => array(
+       'alt_field' => 0,
+       'default_image' => 0,
+       'file_directory' => '',
+       'file_extensions' => 'png gif jpg jpeg',
+       'max_filesize' => '',
+       'max_resolution' => '',
+       'min_resolution' => '',
+       'title_field' => 0,
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'media',
+       'settings' => array(
+         'allowed_schemes' => array(
+           'private' => 'private',
+           'public' => 'public',
+           'vimeo' => 0,
+           'youtube' => 0,
+         ),
+         'allowed_types' => array(
+           'audio' => 0,
+           'document' => 0,
+           'image' => 'image',
+           'video' => 0,
+         ),
+         'browser_plugins' => array(
+           'media_default--media_browser_1' => 'media_default--media_browser_1',
+           'media_default--media_browser_my_files' => 0,
+           'media_internet' => 0,
+           'upload' => 'upload',
+         ),
+         'manualcrop_crop_info' => 1,
+         'manualcrop_default_crop_area' => 1,
+         'manualcrop_enable' => 0,
+         'manualcrop_inline_crop' => 0,
+         'manualcrop_instant_crop' => FALSE,
+         'manualcrop_instant_preview' => 1,
+         'manualcrop_keyboard' => 1,
+         'manualcrop_maximize_default_crop_area' => 0,
+         'manualcrop_require_cropping' => array(),
+         'manualcrop_styles_list' => array(),
+         'manualcrop_styles_mode' => 'include',
+         'manualcrop_thumblist' => 0,
+       ),
+       'type' => 'media_generic',
+       'weight' => 35,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_paid_not_paid'
+   $field_instances['node-research_rotation-field_paid_not_paid'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'list',
+         'settings' => array(),
+         'type' => 'list_default',
+         'weight' => 6,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_paid_not_paid',
+     'label' => 'Paid Not Paid',
+     'required' => 1,
+     'settings' => array(
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'options',
+       'settings' => array(),
+       'type' => 'options_buttons',
+       'weight' => 37,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_professor'
+   $field_instances['node-research_rotation-field_professor'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'text',
+         'settings' => array(),
+         'type' => 'text_default',
+         'weight' => 3,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_professor',
+     'label' => 'Professor',
+     'required' => 0,
+     'settings' => array(
+       'linkit' => array(
+         'button_text' => 'Search',
+         'enable' => 0,
+         'profile' => '',
+       ),
+       'text_processing' => 0,
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'text',
+       'settings' => array(
+         'maxlength_js' => 0,
+         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+         'size' => 60,
+       ),
+       'type' => 'text_textfield',
+       'weight' => 34,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_start_end_date'
+   $field_instances['node-research_rotation-field_start_end_date'] = array(
+     'bundle' => 'research_rotation',
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'date',
+         'settings' => array(
+           'format_type' => 'long',
+           'fromto' => 'both',
+           'multiple_from' => '',
+           'multiple_number' => '',
+           'multiple_to' => '',
+           'show_remaining_days' => FALSE,
+         ),
+         'type' => 'date_default',
+         'weight' => 5,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_start_end_date',
+     'label' => 'Start End Date',
+     'required' => 0,
+     'settings' => array(
+       'default_value' => 'now',
+       'default_value2' => 'same',
+       'default_value_code' => '',
+       'default_value_code2' => '',
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'date',
+       'settings' => array(
+         'increment' => 15,
+         'input_format' => 'M j Y - g:i:sa',
+         'input_format_custom' => '',
+         'label_position' => 'above',
+         'no_fieldset' => 0,
+         'text_parts' => array(),
+         'year_range' => '-3:+3',
+       ),
+       'type' => 'date_popup',
+       'weight' => 36,
+     ),
+   );
+
+   // Exported field_instance: 'node-research_rotation-field_type'
+   $field_instances['node-research_rotation-field_type'] = array(
+     'bundle' => 'research_rotation',
+     'default_value' => NULL,
+     'deleted' => 0,
+     'description' => '',
+     'display' => array(
+       'default' => array(
+         'label' => 'above',
+         'module' => 'text',
+         'settings' => array(),
+         'type' => 'text_default',
+         'weight' => 1,
+       ),
+       'featured' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+       'teaser' => array(
+         'label' => 'above',
+         'settings' => array(),
+         'type' => 'hidden',
+         'weight' => 0,
+       ),
+     ),
+     'entity_type' => 'node',
+     'field_name' => 'field_type',
+     'label' => 'Type',
+     'required' => 0,
+     'settings' => array(
+       'linkit' => array(
+         'button_text' => 'Search',
+         'enable' => 0,
+         'profile' => '',
+       ),
+       'text_processing' => 0,
+       'user_register_form' => FALSE,
+     ),
+     'widget' => array(
+       'active' => 1,
+       'module' => 'text',
+       'settings' => array(
+         'maxlength_js' => 0,
+         'maxlength_js_label' => 'Content limited to @limit characters, remaining: <strong>@remaining</strong>',
+         'size' => 60,
+       ),
+       'type' => 'text_textfield',
+       'weight' => 32,
+     ),
+   );
+
+   // Translatables
+   // Included for use with string extractors like potx.
+   t('Area');
+   t('Grad Undergrad');
+   t('Image');
+   t('Paid Not Paid');
+   t('Professor');
+   t('Project Description');
+   t('Start End Date');
+   t('Type');
+
+   return $field_instances;
+ }
+
+ /**
+  * Implements hook_field_default_field_bases().
+  */
+ function research_rotations_field_default_field_bases() {
+   $field_bases = array();
+
+   // Exported field_base: 'field_area'
+   $field_bases['field_area'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_area',
+     'indexes' => array(
+       'format' => array(
+         0 => 'format',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'text',
+     'settings' => array(
+       'max_length' => 255,
+     ),
+     'translatable' => 0,
+     'type' => 'text',
+   );
+
+   // Exported field_base: 'field_grad_undergrad'
+   $field_bases['field_grad_undergrad'] = array(
+     'active' => 1,
+     'cardinality' => 2,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_grad_undergrad',
+     'indexes' => array(
+       'value' => array(
+         0 => 'value',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'list',
+     'settings' => array(
+       'allowed_values' => array(
+         'Grad' => 'Grad',
+         'Undergrad' => 'Undergrad',
+       ),
+       'allowed_values_function' => '',
+     ),
+     'translatable' => 0,
+     'type' => 'list_text',
+   );
+
+   // Exported field_base: 'field_image'
+   $field_bases['field_image'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_image',
+     'indexes' => array(
+       'fid' => array(
+         0 => 'fid',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'image',
+     'settings' => array(
+       'default_image' => 0,
+       'uri_scheme' => 'public',
+     ),
+     'translatable' => 0,
+     'type' => 'image',
+   );
+
+   // Exported field_base: 'field_paid_not_paid'
+   $field_bases['field_paid_not_paid'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_paid_not_paid',
+     'indexes' => array(
+       'value' => array(
+         0 => 'value',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'list',
+     'settings' => array(
+       'allowed_values' => array(
+         'Paid' => 'Paid',
+         'Not Paid' => 'Not Paid',
+       ),
+       'allowed_values_function' => '',
+     ),
+     'translatable' => 0,
+     'type' => 'list_text',
+   );
+
+   // Exported field_base: 'field_professor'
+   $field_bases['field_professor'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_professor',
+     'indexes' => array(
+       'format' => array(
+         0 => 'format',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'text',
+     'settings' => array(
+       'max_length' => 255,
+     ),
+     'translatable' => 0,
+     'type' => 'text',
+   );
+
+   // Exported field_base: 'field_start_end_date'
+   $field_bases['field_start_end_date'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_start_end_date',
+     'indexes' => array(),
+     'locked' => 0,
+     'module' => 'date',
+     'settings' => array(
+       'cache_count' => 4,
+       'cache_enabled' => 0,
+       'granularity' => array(
+         'day' => 'day',
+         'hour' => 0,
+         'minute' => 0,
+         'month' => 'month',
+         'second' => 0,
+         'year' => 'year',
+       ),
+       'timezone_db' => '',
+       'todate' => 'required',
+       'tz_handling' => 'none',
+     ),
+     'translatable' => 0,
+     'type' => 'datetime',
+   );
+
+   // Exported field_base: 'field_type'
+   $field_bases['field_type'] = array(
+     'active' => 1,
+     'cardinality' => 1,
+     'deleted' => 0,
+     'entity_types' => array(),
+     'field_name' => 'field_type',
+     'indexes' => array(
+       'format' => array(
+         0 => 'format',
+       ),
+     ),
+     'locked' => 0,
+     'module' => 'text',
+     'settings' => array(
+       'max_length' => 255,
+     ),
+     'translatable' => 0,
+     'type' => 'text',
+   );
+
+   return $field_bases;
+ }
+
+ /**
+  * Implements hook_defaultconfig_features().
+  */
+ function research_rotations_defaultconfig_features() {
+   return array(
+     'research_rotations' => array(
+       'panelizer_defaults' => 'panelizer_defaults',
+     ),
+   );
+ }
+
+ /**
+  * Implements hook_defaultconfig_panelizer_defaults().
+  */
+ function research_rotations_defaultconfig_panelizer_defaults() {
+   $export = array();
+
+   return $export;
+ }
+
+ /**
+  * Implements hook_ctools_plugin_api().
+  */
+ function research_rotations_ctools_plugin_api($module = NULL, $api = NULL) {
+   if ($module == "panelizer" && $api == "panelizer") {
+     return array("version" => "1");
+   }
+   if ($module == "strongarm" && $api == "strongarm") {
+     return array("version" => "1");
+   }
+ }
+
+ /**
+  * Implements hook_node_info().
+  */
+ function research_rotations_node_info() {
+   $items = array(
+     'research_rotation' => array(
+       'name' => t('Research Rotation'),
+       'base' => 'node_content',
+       'description' => t('This content type is being used for student research rotation choice management.'),
+       'has_title' => '1',
+       'title_label' => t('Project Title'),
+       'help' => '',
+     ),
+   );
+   drupal_alter('node_info', $items);
+   return $items;
+ }
+
+ //--
+
+ /**
+ * Implements hook_menu().
+ */
+ function research_rotations_menu() {
+   $items = array();
+
+   $items['research-rotations/signup'] = array(
+     'title' => 'Research Rotations Signup Form',
+     'description' => 'Use this form to signup for research rotations.',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('research_rotations_form'),
+     'access callback' => TRUE
+   );
+
+   $items['research-rotations/signup/graduate'] = array(
+     'title' => 'Graduate Research Rotations Signup Form',
+     'description' => 'Use this form to signup for graduate research rotations.',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('research_rotations_graduate_form'),
+     'access callback' => TRUE
+   );
+
+   $items['research-rotations/signup/undergraduate'] = array(
+     'title' => 'Undergraduate Research Rotations Signup Form',
+     'description' => 'Use this form to signup for undergraduate research rotations.',
+     'page callback' => 'drupal_get_form',
+     'page arguments' => array('research_rotations_undergraduate_form'),
+     'access callback' => TRUE
+   );
+
+   $items['research-rotations/submissions'] = array(
+     'title' => 'Research Rotations Signup Submissions',
+     'description' => 'Use this form to manage research rotations.',
+     'type' => MENU_NORMAL_ITEM,
+     'page callback' => 'research_rotations_submissions',
+     'access arguments' => array('administer nodes')
+   );
+
+   $items['research-rotations/exportcsv'] = array(
+     'page callback' => 'download_csv_function',
+     'access callback' => TRUE
+   );
+
+   return $items;
+ }
+
+ /**
+ * All Research Rotations form definition.
+ */
+ function research_rotations_form($form, $form_state) {
+
+     global $user;
+     // if the user is not logged in, ask them to
+     if (!$user->uid) {
+       drupal_goto('cas', array('query'=>drupal_get_destination()));
+     }
+
+     $query = new EntityFieldQuery();
+
+     $query->entityCondition('entity_type', 'node')
+       ->entityCondition('bundle', 'research_rotation')
+       ->propertyCondition('status', NODE_PUBLISHED);
+
+     $result = $query->execute();
+
+     if (isset($result['node'])) {
+       $research_rotations_nids = array_keys($result['node']);
+       $research_rotations = entity_load('node', $research_rotations_nids);
+     }
+
+     $form['research_rotation_fieldset'] = array(
+       '#type' => 'fieldset',
+       '#prefix' => '<table>',
+       '#suffix' => '</table>',
+       '#tree' => TRUE,
+     );
+     $form['research_rotation_fieldset']['header'] = array(
+       '#markup' => '<thead>
+         <tr>
+           <th>Type</th>
+           <th>Area</th>
+           <th>Project</th>
+           <th>Professor</th>
+           <th>1</th>
+           <th>2</th>
+           <th>3</th>
+         </tr>
+       </thead>',
+     );
+
+    $i = 1;
+
+    foreach ($research_rotations as $research_rotation) {
+
+        $form['research_rotation_fieldset']['research_rotation_row_' . $i] = array(
+            '#prefix' => '<tr>',
+            '#suffix' => '</tr>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_type_' . $i] = array(
+            '#markup' => $research_rotation->field_type['und'][0]['safe_value'],
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_area_' . $i] = array(
+            '#markup' => $research_rotation->field_area['und'][0]['safe_value'],
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_project_' . $i] = array(
+            '#markup' => l($research_rotation->title,"node/".$research_rotation->nid,array('attributes' => array('target' => '_blank'))),
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_professor_' . $i] = array(
+            '#markup' => $research_rotation->field_professor['und'][0]['safe_value'],
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_first_choice_' . $i] = array(
+            '#type' => 'radio',
+            '#return_value' => $research_rotation->nid,
+            '#default_value' => isset($form_state['input']['first_choice']) ? $form_state['input']['first_choice'] : '',
+            '#title' => '',
+            '#attributes' => array('name' => array('first_choice')),
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_second_choice_' . $i] = array(
+            '#type' => 'radio',
+            '#return_value' => $research_rotation->nid,
+            '#default_value' => isset($form_state['input']['second_choice']) ? $form_state['input']['second_choice'] : '',
+            '#title' => '',
+            '#attributes' => array('name' => array('second_choice')),
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+        $form['research_rotation_fieldset']['research_rotation_third_choice_' . $i] = array(
+            '#type' => 'radio',
+            '#return_value' => $research_rotation->nid,
+            '#default_value' => isset($form_state['input']['third_choice']) ? $form_state['input']['third_choice'] : '',
+            '#title' => '',
+            '#attributes' => array('name' => array('third_choice')),
+            '#prefix' => '<td>',
+            '#suffix' => '</td>',
+        );
+
+      $i++;
+
+    }
+
+    $form['comments'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Comments'),
+    );
+
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+
+    return $form;
+
+  }
+
+  /**
+  * Validation handler.
+  */
+ function research_rotations_form_validate($form, &$form_state) {
+
+   if ( !isset ( $form_state['input']['first_choice'] ) ) {
+      form_set_error('', t("Please select a first choice."));
+   }
+
+   if ( !isset ( $form_state['input']['second_choice'] ) ) {
+      form_set_error('', t("Please select a second choice."));
+   }
+
+   if ( !isset ( $form_state['input']['third_choice'] ) ) {
+      form_set_error('', t("Please select a third choice."));
+   }
+
+   if ( strlen($form_state['input']['comments']) > 140 ) {
+      form_set_error('', t("Comments must be less than 140 characters. That's a tweet length."));
+   }
+
+ }
+
+ /**
+ * Submit handler.
+ */
+ function research_rotations_form_submit($form, &$form_state) {
+
+  global $user;
+
+   $nid = db_insert('research_rotations_signups')
+     ->fields(array(
+       'student_name' => $user->name,
+       'first_choice' => $form_state['input']['first_choice'],
+       'second_choice' => $form_state['input']['second_choice'],
+       'third_choice' => $form_state['input']['third_choice'],
+       'comments' => $form_state['values']['comments'],
+     ))
+     ->execute();
+   drupal_set_message(t('Thank you for signing up.'));
+
+ }
+
+ /**
+ * Graduate Research Rotations form definition.
+ */
+ function research_rotations_graduate_form($form, $form_state) {
+
+     global $user;
+     // if the user is not logged in, ask them to
+     if (!$user->uid) {
+       drupal_goto('cas', array('query'=>drupal_get_destination()));
+     }
+
+     $query = new EntityFieldQuery();
+
+     $query->entityCondition('entity_type', 'node')
+       ->entityCondition('bundle', 'research_rotation')
+       ->fieldCondition('field_grad_undergrad', 'value', 'Grad', '=')
+       ->propertyCondition('status', NODE_PUBLISHED);
+
+     $result = $query->execute();
+
+     if (isset($result['node'])) {
+       $research_rotations_nids = array_keys($result['node']);
+       $research_rotations = entity_load('node', $research_rotations_nids);
+     }
+
+     $form['research_rotation_fieldset'] = array(
+       '#type' => 'fieldset',
+       '#prefix' => '<table>',
+       '#suffix' => '</table>',
+       '#tree' => TRUE,
+     );
+     $form['research_rotation_fieldset']['header'] = array(
+       '#markup' => '<thead>
+         <tr>
+           <th>Type</th>
+           <th>Area</th>
+           <th>Project</th>
+           <th>Professor</th>
+           <th>1</th>
+           <th>2</th>
+           <th>3</th>
+         </tr>
+       </thead>',
+     );
+
+    $i = 1;
+
+    foreach ($research_rotations as $research_rotation) {
+
+      $form['research_rotation_fieldset']['research_rotation_row_' . $i] = array(
+          '#prefix' => '<tr>',
+          '#suffix' => '</tr>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_type_' . $i] = array(
+          '#markup' => $research_rotation->field_type['und'][0]['safe_value'],
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_area_' . $i] = array(
+          '#markup' => $research_rotation->field_area['und'][0]['safe_value'],
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_project_' . $i] = array(
+          '#markup' => l($research_rotation->title,"node/".$research_rotation->nid,array('attributes' => array('target' => '_blank'))),
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_professor_' . $i] = array(
+          '#markup' => $research_rotation->field_professor['und'][0]['safe_value'],
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_first_choice_' . $i] = array(
+          '#type' => 'radio',
+          '#return_value' => $research_rotation->nid,
+          '#default_value' => isset($form_state['input']['first_choice']) ? $form_state['input']['first_choice'] : '',
+          '#title' => '',
+          '#attributes' => array('name' => array('first_choice')),
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_second_choice_' . $i] = array(
+          '#type' => 'radio',
+          '#return_value' => $research_rotation->nid,
+          '#default_value' => isset($form_state['input']['second_choice']) ? $form_state['input']['second_choice'] : '',
+          '#title' => '',
+          '#attributes' => array('name' => array('second_choice')),
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $form['research_rotation_fieldset']['research_rotation_third_choice_' . $i] = array(
+          '#type' => 'radio',
+          '#return_value' => $research_rotation->nid,
+          '#default_value' => isset($form_state['input']['third_choice']) ? $form_state['input']['third_choice'] : '',
+          '#title' => '',
+          '#attributes' => array('name' => array('third_choice')),
+          '#prefix' => '<td>',
+          '#suffix' => '</td>',
+      );
+
+      $i++;
+
+    }
+
+    $form['comments'] = array(
+      '#type' => 'textarea',
+      '#title' => t('Comments'),
+    );
+
+    $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Submit'),
+    );
+
+    return $form;
+
+  }
+
+  /**
+  * Validation handler.
+  */
+ function research_rotations_graduate_form_validate($form, &$form_state) {
+
+   if ( !isset ( $form_state['input']['first_choice'] ) ) {
+      form_set_error('', t("Please select a first choice."));
+   }
+
+   if ( !isset ( $form_state['input']['second_choice'] ) ) {
+      form_set_error('', t("Please select a second choice."));
+   }
+
+   if ( !isset ( $form_state['input']['third_choice'] ) ) {
+      form_set_error('', t("Please select a third choice."));
+   }
+
+   if ( strlen($form_state['input']['comments']) > 140 ) {
+      form_set_error('', t("Comments must be less than 140 characters. That's a tweet length."));
+   }
+
+ }
+
+ /**
+ * Submit handler.
+ */
+ function research_rotations_graduate_form_submit($form, &$form_state) {
+
+  global $user;
+
+   $nid = db_insert('research_rotations_signups')
+     ->fields(array(
+       'student_name' => $user->name,
+       'first_choice' => $form_state['input']['first_choice'],
+       'second_choice' => $form_state['input']['second_choice'],
+       'third_choice' => $form_state['input']['third_choice'],
+       'comments' => $form_state['values']['comments'],
+     ))
+     ->execute();
+   drupal_set_message(t('Thank you for signing up.'));
+
+ }
+
+  /**
+  * Undergraduate Research Rotations form definition.
+  */
+  function research_rotations_undergraduate_form($form, $form_state) {
+
+      global $user;
+      // if the user is not logged in, ask them to
+      if (!$user->uid) {
+        drupal_goto('cas', array('query'=>drupal_get_destination()));
+      }
+
+      $query = new EntityFieldQuery();
+
+      $query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'research_rotation')
+        ->fieldCondition('field_grad_undergrad', 'value', 'Undergrad', '=')
+        ->propertyCondition('status', NODE_PUBLISHED);
+
+      $result = $query->execute();
+
+      if (isset($result['node'])) {
+        $research_rotations_nids = array_keys($result['node']);
+        $research_rotations = entity_load('node', $research_rotations_nids);
+      }
+
+      $form['research_rotation_fieldset'] = array(
+        '#type' => 'fieldset',
+        '#prefix' => '<table>',
+        '#suffix' => '</table>',
+        '#tree' => TRUE,
+      );
+      $form['research_rotation_fieldset']['header'] = array(
+        '#markup' => '<thead>
+          <tr>
+            <th>Type</th>
+            <th>Area</th>
+            <th>Project</th>
+            <th>Professor</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+          </tr>
+        </thead>',
+      );
+
+     $i = 1;
+
+     foreach ($research_rotations as $research_rotation) {
+
+       $form['research_rotation_fieldset']['research_rotation_row_' . $i] = array(
+           '#prefix' => '<tr>',
+           '#suffix' => '</tr>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_type_' . $i] = array(
+           '#markup' => $research_rotation->field_type['und'][0]['safe_value'],
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_area_' . $i] = array(
+           '#markup' => $research_rotation->field_area['und'][0]['safe_value'],
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_project_' . $i] = array(
+           '#markup' => l($research_rotation->title,"node/".$research_rotation->nid,array('attributes' => array('target' => '_blank'))),
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_professor_' . $i] = array(
+           '#markup' => $research_rotation->field_professor['und'][0]['safe_value'],
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_first_choice_' . $i] = array(
+           '#type' => 'radio',
+           '#return_value' => $research_rotation->nid,
+           '#default_value' => isset($form_state['input']['first_choice']) ? $form_state['input']['first_choice'] : '',
+           '#title' => '',
+           '#attributes' => array('name' => array('first_choice')),
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_second_choice_' . $i] = array(
+           '#type' => 'radio',
+           '#return_value' => $research_rotation->nid,
+           '#default_value' => isset($form_state['input']['second_choice']) ? $form_state['input']['second_choice'] : '',
+           '#title' => '',
+           '#attributes' => array('name' => array('second_choice')),
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $form['research_rotation_fieldset']['research_rotation_third_choice_' . $i] = array(
+           '#type' => 'radio',
+           '#return_value' => $research_rotation->nid,
+           '#default_value' => isset($form_state['input']['third_choice']) ? $form_state['input']['third_choice'] : '',
+           '#title' => '',
+           '#attributes' => array('name' => array('third_choice')),
+           '#prefix' => '<td>',
+           '#suffix' => '</td>',
+       );
+
+       $i++;
+
+     }
+
+     $form['comments'] = array(
+       '#type' => 'textarea',
+       '#title' => t('Comments'),
+     );
+
+     $form['submit'] = array(
+       '#type' => 'submit',
+       '#value' => t('Submit'),
+     );
+
+     return $form;
+
+   }
+
+   /**
+   * Validation handler.
+   */
+  function research_rotations_undergraduate_form_validate($form, &$form_state) {
+
+    if ( !isset ( $form_state['input']['first_choice'] ) ) {
+       form_set_error('', t("Please select a first choice."));
+    }
+
+    if ( !isset ( $form_state['input']['second_choice'] ) ) {
+       form_set_error('', t("Please select a second choice."));
+    }
+
+    if ( !isset ( $form_state['input']['third_choice'] ) ) {
+       form_set_error('', t("Please select a third choice."));
+    }
+
+    if ( strlen($form_state['input']['comments']) > 140 ) {
+       form_set_error('', t("Comments must be less than 140 characters. That's a tweet length."));
+    }
+
+  }
+
+  /**
+  * Submit handler.
+  */
+  function research_rotations_undergraduate_form_submit($form, &$form_state) {
+
+   global $user;
+
+    $nid = db_insert('research_rotations_signups')
+      ->fields(array(
+        'student_name' => $user->name,
+        'first_choice' => $form_state['input']['first_choice'],
+        'second_choice' => $form_state['input']['second_choice'],
+        'third_choice' => $form_state['input']['third_choice'],
+        'comments' => $form_state['values']['comments'],
+      ))
+      ->execute();
+    drupal_set_message(t('Thank you for signing up.'));
+
+  }
+
+ /**
+ * View the form submissions.
+ */
+function research_rotations_submissions(){
+
+  $results = db_query("SELECT * FROM {research_rotations_signups}");
+
+  if (!$results->rowCount()) {
+    drupal_set_message(t('There are currently no research rotation submissions.'));
+  }
+
+  $header = array(t('Student Name'), t('Email'), t('1st Choice'), t('2nd Choice'), t('3rd Choice'), t('Comments'));
+
+  $rows = array();
+
+  foreach ($results as $result) {
+
+    $username = $result->student_name;
+
+    $url = 'https://asudir-solr.asu.edu/asudir/directory/select?q=asuriteId:'.$username.'&wt=json';
+    $JSON = file_get_contents($url);
+    $data = json_decode($JSON);
+    $fullname = $data->response->docs[0]->displayName;
+    $emailaddress = $data->response->docs[0]->emailAddress;
+
+    //--
+
+    $first_choice_node = node_load($result->first_choice);
+    $first_choice_title = $first_choice_node->title;
+
+    $second_choice_node = node_load($result->second_choice);
+    $second_choice_title = $second_choice_node->title;
+
+    $third_choice_node = node_load($result->third_choice);
+    $third_choice_title = $third_choice_node->title;
+
+    //--
+
+    $rows[] = array(
+      $fullname,
+      $emailaddress,
+      $first_choice_title,
+      $second_choice_title,
+      $third_choice_title,
+      $result->comments
+    );
+  }
+
+  $form = array(
+
+    '#action' => url('research-rotations/exportcsv'),
+
+    'content' => array(
+      '#type' => 'markup',
+      '#markup' => theme('table', array('header' => $header, 'rows' => $rows)),
+    ),
+
+    'link' => array(
+      '#type' => 'markup',
+      '#markup' => "<p><a class='btn btn-primary' href='/research-rotations/exportcsv'>Export as CSV.</a></p>",
+    ),
+
+  );
+
+  return $form;
+
+
+}
+
+function download_csv_function() {
+  // Prevent Devel from messing us up.
+  $GLOBALS['devel_shutdown'] = TRUE;
+
+  // Set the headers to indicate this is a CSV file.
+  header('Content-type: text/csv; charset=UTF-8');
+  header('Content-Disposition: attachment; filename=rr-export.csv');
+  header('Pragma: no-cache');
+  header('Expires: 0');
+
+  // Create a file.
+  $output = fopen('php://output', 'w');
+
+  //header
+  $header = array(t('Student Name'), t('Email'), t('1st Choice'), t('2nd Choice'), t('3rd Choice'), t('Comments'));
+  fputcsv ($output, $header);
+
+  //rest of data
+  $query = "SELECT * FROM {research_rotations_signups}";
+  $results = db_query($query);
+
+  foreach ($results as $row) {
+
+    $username = $row->student_name;
+
+    $url = 'https://asudir-solr.asu.edu/asudir/directory/select?q=asuriteId:'.$username.'&wt=json';
+    $JSON = file_get_contents($url);
+    $data = json_decode($JSON);
+    $fullname = $data->response->docs[0]->displayName;
+    $emailaddress = $data->response->docs[0]->emailAddress;
+
+    //--
+
+    $first_choice_node = node_load($row->first_choice);
+    $first_choice_title = $first_choice_node->title;
+
+    $second_choice_node = node_load($row->second_choice);
+    $second_choice_title = $second_choice_node->title;
+
+    $third_choice_node = node_load($row->third_choice);
+    $third_choice_title = $third_choice_node->title;
+
+    //--
+
+    fputcsv($output, array($fullname, $emailaddress, $first_choice_title, $second_choice_title, $third_choice_title, $row->comments));
+  }
+
+  fclose($output);
+
+  drupal_exit();
+  exit();
+
+}
